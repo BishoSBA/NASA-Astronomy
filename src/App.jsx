@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import Carousel from "./components/Carousel";
 import "./App.css";
+import Button from "react-bootstrap/Button";
 
 const App = () => {
 	const [count, setCount] = useState(0);
@@ -11,33 +12,18 @@ const App = () => {
 			<header className="App-content">
 				<img src={logo} className="App-logo" alt="logo" />
 				<h1>NASA Astronomy of the Day</h1>
-				<p>
+				<form className="">
+					<input type={"date"}></input>
+					<button type="submit" className="bg-black">
+						Check it out
+					</button>
+				</form>
+				{/* <p>
 					<button onClick={() => setCount((count) => count + 1)}>
 						count is: {count}
 					</button>
-				</p>
-				<p>
-					Edit <code>App.jsx</code> and save to test HMR updates.
-				</p>
-				<p>
-					<a
-						className="App-link"
-						href="https://reactjs.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Learn React
-					</a>
-					{" | "}
-					<a
-						className="App-link"
-						href="https://vitejs.dev/guide/features.html"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Vite Docs
-					</a>
-				</p>
+				</p> */}
+
 				<Carousel></Carousel>
 			</header>
 		</div>
