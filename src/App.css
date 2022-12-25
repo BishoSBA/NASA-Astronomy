@@ -1,9 +1,11 @@
 .App {
 	text-align: center;
+	background-image: url("/public/string-of-galaxies-4k-te.jpg");
+	background-size: cover;
 }
 
 .App-logo {
-	height: 40vmin;
+	height: 10vmin;
 	pointer-events: none;
 }
 
@@ -13,7 +15,7 @@
 	}
 }
 
-.App-header {
+.App-content {
 	background-image: url("/public/string-of-galaxies-4k-te.jpg");
 	background-size: cover;
 	min-height: 100vh;
