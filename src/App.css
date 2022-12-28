@@ -1,5 +1,5 @@
 .App {
-	min-height: 100vh;
+	min-height: 200vh;
 	text-align: center;
 	background-image: url("/string-of-galaxies-4k-te.jpg");
 	background-size: cover;
@@ -37,8 +37,14 @@
 	/* color: white; */
 }
 
+form {
+	display: flex;
+	gap: 1em;
+}
+
 .buttons {
 	display: flex;
+	gap: 2em;
 }
 
 .App-link {
@@ -69,8 +75,8 @@ button {
 .media {
 	margin: auto;
 	width: 95vw;
+	max-width: 800px;
 	max-height: 70vh;
-	object-fit: cover;
 }
 
 .description {

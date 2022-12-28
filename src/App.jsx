@@ -1,18 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import Carousel from "./components/Carousel";
 import "./App.css";
 import Button from "react-bootstrap/Button";
 
+const MAX_DATE = new Date().toISOString().split("T")[0];
+
 const App = () => {
 	const [date, setDate] = useState(new Date());
 	const [media, setMedia] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [stringDate, setStringDate] = useState(date.toISOString().split("T")[0]);
+	const [stringDate, setStringDate] = useState(MAX_DATE);
+	const dateInput = useRef(null);
 
 	useEffect(() => {
 		getMedia();
-	}, {});
+	}, []);
 
 	const getMedia = async () => {
 		const picture = await fetch(
@@ -38,6 +41,8 @@ const App = () => {
 		setDate(tempDate);
 		setStringDate(date.toISOString().split("T")[0]);
 		setIsLoading(true);
+		dateInput.current.valueAsDate = date;
+		console.log(dateInput);
 		getMedia();
 	};
 
@@ -46,13 +51,21 @@ const App = () => {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
+				<img src="/NASA.png" className="App-logo" alt="logo" />
 				<h1>NASA Space API</h1>
 
-				<form className="">
-					<input id="dateInput" type={"date"} defaultValue={stringDate}></input>
+				<form>
+					<input
+						id="dateInput"
+						ref={dateInput}
+						type={"date"}
+						placeholder="dd-mm-yyyy"
+						min="1997-01-01"
+						max="2030-12-31"
+						defaultValue={stringDate}
+					></input>
 					<Button
-						variant="light"
+						variant="dark"
 						onClick={(e) =>
 							changeDate(new Date(document.getElementById("dateInput").value))
 						}
@@ -66,7 +79,7 @@ const App = () => {
 			<div className="App-content">
 				<div className="buttons">
 					<Button
-						variant="light"
+						variant="secondary"
 						onClick={() => changeDateByOne(-1)}
 						type="button"
 						className="bg-red"
@@ -74,7 +87,7 @@ const App = () => {
 						Previous
 					</Button>
 					<Button
-						variant="light"
+						variant="secondary"
 						onClick={() => changeDateByOne(1)}
 						type="button"
 						className="bg-blue"
