@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import Carousel from "./components/Carousel";
 import "./App.css";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const MAX_DATE = new Date().toISOString().split("T")[0];
 
@@ -49,53 +50,54 @@ const App = () => {
 	console.log("normal app");
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src="/NASA.png" className="App-logo" alt="logo" />
-				<h1>NASA Space API</h1>
-
-				<form>
-					<input
-						id="dateInput"
-						ref={dateInput}
-						type={"date"}
-						placeholder="dd-mm-yyyy"
-						min="1997-01-01"
-						max="2030-12-31"
-						defaultValue={stringDate}
-					></input>
-					<Button
-						variant="dark"
-						onClick={(e) =>
-							changeDate(new Date(document.getElementById("dateInput").value))
-						}
-						type="button"
-						className="bg-blue"
-					>
-						View Date
-					</Button>
-				</form>
-			</header>
-			<div className="App-content">
-				<div className="buttons">
-					<Button
-						variant="secondary"
-						onClick={() => changeDateByOne(-1)}
-						type="button"
-						className="bg-red"
-					>
-						Previous
-					</Button>
-					<Button
-						variant="secondary"
-						onClick={() => changeDateByOne(1)}
-						type="button"
-						className="bg-blue"
-					>
-						Next
-					</Button>
+		<div className="App text-white">
+			<div className="container">
+				<header className="App-header d-flex align-items-center">
+					<img src="/NASA.png" className="App-logo" alt="logo" />
+					<h1 className="mx-auto">NASA Space API</h1>
+					<form>
+						<input
+							id="dateInput"
+							ref={dateInput}
+							type={"date"}
+							placeholder="dd-mm-yyyy"
+							min="1997-01-01"
+							max="2030-12-31"
+							defaultValue={stringDate}
+						></input>
+						<Button
+							variant="dark"
+							onClick={(e) =>
+								changeDate(new Date(document.getElementById("dateInput").value))
+							}
+							type="button"
+							className="bg-blue"
+						>
+							View Date
+						</Button>
+					</form>
+				</header>
+				<div className="App-content">
+					<div className="buttons">
+						<Button
+							variant="secondary"
+							onClick={() => changeDateByOne(-1)}
+							type="button"
+							className="bg-red"
+						>
+							Previous
+						</Button>
+						<Button
+							variant="secondary"
+							onClick={() => changeDateByOne(1)}
+							type="button"
+							className="bg-blue"
+						>
+							Next
+						</Button>
+					</div>
+					<Carousel media={media} isLoading={isLoading}></Carousel>
 				</div>
-				<Carousel media={media} isLoading={isLoading}></Carousel>
 			</div>
 		</div>
 	);

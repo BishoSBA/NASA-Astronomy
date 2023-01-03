@@ -5,25 +5,27 @@ function Carousel({ stringDate, media, isLoading }) {
 	if (media) {
 		return (
 			<>
-				{isLoading == true ? (
-					<Spinner animation="border" role="status" color="white">
-						<span className="visually-hidden">Loading...</span>
-					</Spinner>
-				) : (
-					<div>
-						<div className="carousel">
-							{media.media_type === "image" ? (
-								<img className="media" src={media.url} alt={media.title} />
-							) : (
-								<iframe className="media" src={media.url} title={media.title} />
-							)}
+				<div className="carousel">
+					{isLoading == true ? (
+						<Spinner animation="border" role="status" color="white">
+							<span className="visually-hidden">Loading...</span>
+						</Spinner>
+					) : (
+						<div>
+							<div>
+								{media.media_type === "image" ? (
+									<img className="media" src={media.url} alt={media.title} />
+								) : (
+									<iframe className="media" src={media.url} title={media.title} />
+								)}
+							</div>
+							<div className="description">
+								<h3>{media.title}</h3>
+								<p>{media.explanation}</p>
+							</div>
 						</div>
-						<div className="description">
-							<h3>{media.title}</h3>
-							<p>{media.explanation}</p>
-						</div>
-					</div>
-				)}
+					)}
+				</div>
 			</>
 		);
 	} else {
