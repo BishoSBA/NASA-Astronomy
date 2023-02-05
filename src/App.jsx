@@ -24,7 +24,6 @@ const App = () => {
 				stringDate
 		);
 
-		console.log("media");
 		setMedia(await picture.json());
 		if (await picture) setIsLoading(false);
 	};
@@ -47,13 +46,11 @@ const App = () => {
 		getMedia();
 	};
 
-	console.log("normal app");
-
 	return (
-		<div className="App text-white">
+		<div className="App">
 			<div className="container">
-				<header className="App-header d-flex align-items-center">
-					<img src="/NASA.png" className="App-logo" alt="logo" />
+				<header className="App-header">
+					<img src="/nasa-logo.png" className="App-logo" alt="logo" />
 					<h1 className="mx-auto">NASA Space API</h1>
 					<form>
 						<input
@@ -64,38 +61,38 @@ const App = () => {
 							min="1997-01-01"
 							max="2030-12-31"
 							defaultValue={stringDate}
+							className="form-control"
 						></input>
 						<Button
-							variant="dark"
 							onClick={(e) =>
 								changeDate(new Date(document.getElementById("dateInput").value))
 							}
 							type="button"
-							className="bg-blue"
+							className="form-control submit-button"
 						>
 							View Date
 						</Button>
 					</form>
-				</header>
-				<div className="App-content">
 					<div className="buttons">
 						<Button
-							variant="secondary"
+							variant="dark"
 							onClick={() => changeDateByOne(-1)}
 							type="button"
-							className="bg-red"
+							className="control-button"
 						>
 							Previous
 						</Button>
 						<Button
-							variant="secondary"
+							variant="dark"
 							onClick={() => changeDateByOne(1)}
 							type="button"
-							className="bg-blue"
+							className="control-button"
 						>
 							Next
 						</Button>
 					</div>
+				</header>
+				<div className="App-content">
 					<Carousel media={media} isLoading={isLoading}></Carousel>
 				</div>
 			</div>
