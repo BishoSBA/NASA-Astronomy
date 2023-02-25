@@ -8,14 +8,14 @@ import Form from "react-bootstrap/Form";
 const MAX_DATE = new Date().toISOString().split("T")[0];
 
 const App = () => {
-	const [date, setDate] = useState(new Date());
 	const [media, setMedia] = useState({});
+	const [date, setDate] = useState(new Date());
 	const [isLoading, setIsLoading] = useState(true);
 	const [stringDate, setStringDate] = useState(MAX_DATE);
 	const dateInput = useRef(null);
 
 	useEffect(() => {
-		getMedia();
+		update();
 	}, []);
 
 	const getMedia = async () => {
@@ -23,16 +23,21 @@ const App = () => {
 			`https://api.nasa.gov/planetary/apod?api_key=7y0K6cF0nxuEiNzzGRumswQsrwIxl6oUDtqh5I1Q&date=` +
 				stringDate
 		);
+		return await picture.json();
+	};
 
-		setMedia(await picture.json());
-		if (await picture) setIsLoading(false);
+	const update = () => {
+		getMedia().then((pic) => {
+			setMedia(pic);
+			if (pic) setIsLoading(false);
+		});
 	};
 
 	const changeDate = (value) => {
 		setDate(value);
 		setStringDate(date.toISOString().split("T")[0]);
 		setIsLoading(true);
-		getMedia();
+		update();
 	};
 
 	const changeDateByOne = (value) => {
@@ -42,8 +47,7 @@ const App = () => {
 		setStringDate(date.toISOString().split("T")[0]);
 		setIsLoading(true);
 		dateInput.current.valueAsDate = date;
-		console.log(dateInput);
-		getMedia();
+		update();
 	};
 
 	return (
